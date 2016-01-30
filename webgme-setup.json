@@ -1,4 +1,19 @@
 {
-  "components": {},
-  "dependencies": {}
+  "components": {
+    "plugins": {
+      "Diagrammer": {
+        "src": "src/plugins/Diagrammer",
+        "test": "test/plugins/Diagrammer"
+      }
+    },
+    "seeds": {
+      "ClassDiagrams": {
+        "src": "src/seeds/ClassDiagrams"
+      }
+    }
+  },
+  "dependencies": {
+    "plugins": {},
+    "seeds": {}
+  }
 }
