@@ -10,10 +10,18 @@
       "ClassDiagrams": {
         "src": "src/seeds/ClassDiagrams"
       }
-    }
+    },
+    "addons": {},
+    "decorators": {},
+    "layouts": {},
+    "visualizers": {}
   },
   "dependencies": {
     "plugins": {},
-    "seeds": {}
+    "seeds": {},
+    "addons": {},
+    "decorators": {},
+    "layouts": {},
+    "visualizers": {}
   }
 }
