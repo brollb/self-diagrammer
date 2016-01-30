@@ -104,7 +104,7 @@ define([
                 parent: this.rootNode,
                 base: this.META.Diagram
             });
-            this.core.setAttribute(this.diagramNode, 'name', md.name);
+            this.core.setAttribute(this.diagramNode, 'name', md.name.replace(/\.[a-zA-Z]+$/, ''));
 
             this.blobClient.getObject(srcHash, (err, buffer) => {
                 if (err) {
