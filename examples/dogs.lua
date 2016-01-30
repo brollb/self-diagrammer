@@ -31,9 +31,3 @@ Retriever = Dog:new()
 function Retriever:retrieve(stick)
     print "retrieving stick"
 end
-
-if Dog == Retriever then
-    print "Dog == Retriever"
-else
-    print "Dog != Retriever"
-end

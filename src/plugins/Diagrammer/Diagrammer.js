@@ -8,13 +8,17 @@
 define([
     'plugin/PluginConfig',
     'plugin/PluginBase',
+    './dagre.min.js',
     './lua.js'  // defines luajs globally
 ], function (
     PluginConfig,
-    PluginBase
+    PluginBase,
+    dagre
 ) {
     'use strict';
 
+    var WIDTH = 120,
+        HEIGHT = 80;
     /**
      * Initializes a new instance of Diagrammer.
      * @class
@@ -186,6 +190,7 @@ define([
     Diagrammer.prototype.diagram = function () {
         this.diagramClasses();
         this.diagramInheritance();
+        this.updatePositions();
     };
 
     Diagrammer.prototype.diagramClasses = function () {
@@ -223,6 +228,50 @@ define([
             });
         this.core.setPointer(conn, 'src', srcNode);
         this.core.setPointer(conn, 'dst', dstNode);
+    };
+
+    Diagrammer.prototype.updatePositions = function () {
+        // Create the graph in dagre and get the positions
+        this.logger.info('Positioning nodes');
+        var graph = new dagre.graphlib.Graph(),
+            nodeNames = Object.keys(this.classNodes);
+
+        // Add the nodes
+        graph.setGraph({});
+        graph.setDefaultEdgeLabel(function() { return {}; });
+        nodeNames.forEach(name => {
+            graph.setNode(name, {
+                label: name,
+                x: 100,
+                y: 100,
+                width: WIDTH,
+                height: HEIGHT
+            });
+        });
+
+        // Add connections
+        this.baseClasses.forEach(pair => {
+            var src = pair[0],
+                dst = pair[1];
+
+            console.log('connecting ' + src + ' and ' + dst);
+            graph.setEdge(dst, src);
+        });
+
+        // Calculate positions
+        dagre.layout(graph);
+
+        // Set the positions
+        graph.nodes().forEach(name => {
+            var pos = {
+                x: graph.node(name).x,
+                y: graph.node(name).y
+            };
+            this.core.setRegistry(this.classNodes[name], 'position', pos);
+        });
+    };
+
+    Diagrammer.prototype.positionNodes = function () {
     };
 
     return Diagrammer;
