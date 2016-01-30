@@ -9,13 +9,16 @@ var config = require('webgme/config/config.default'),
 
 // The paths can be loaded from the webgme-setup.json
 config.plugin.basePaths.push('src/plugins');
+config.plugin.basePaths.push('node_modules/webgme-simple-nodes/src/plugins');
 config.seedProjects.basePaths.push('src/seeds/ClassDiagrams');
 
 
 // Visualizer descriptors
 
 // Add requirejs paths
-
+config.requirejsPaths = {
+  'TemplateCreator': 'node_modules/webgme-simple-nodes/src/plugins/TemplateCreator'
+};
 
 
 config.mongo.uri = 'mongodb://127.0.0.1:27017/self_diagrammer';

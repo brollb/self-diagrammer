@@ -4,6 +4,10 @@
       "Diagrammer": {
         "src": "src/plugins/Diagrammer",
         "test": "test/plugins/Diagrammer"
+      },
+      "CreateJava": {
+        "src": "src/plugins/CreateJava",
+        "test": "test/plugins/CreateJava"
       }
     },
     "seeds": {
@@ -17,7 +21,12 @@
     "visualizers": {}
   },
   "dependencies": {
-    "plugins": {},
+    "plugins": {
+      "TemplateCreator": {
+        "project": "webgme-simple-nodes",
+        "path": "node_modules/webgme-simple-nodes/src/plugins/TemplateCreator"
+      }
+    },
     "seeds": {},
     "addons": {},
     "decorators": {},
