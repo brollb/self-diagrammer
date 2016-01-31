@@ -9,7 +9,6 @@ define([
     'plugin/PluginConfig',
     'plugin/PluginBase',
     './dagre.min.js',
-    './lua.js'  // defines luajs globally
 ], function (
     PluginConfig,
     PluginBase,
@@ -68,7 +67,7 @@ define([
             {
                 name: 'source',
                 displayName: 'Source Code',
-                description: 'Lua source to diagram',
+                description: 'source code to diagram',
                 value: '',
                 valueType: 'asset',
                 readOnly: false
@@ -112,17 +111,15 @@ define([
                 }
 
                 var src = String.fromCharCode.apply(null, new Uint8Array(buffer)),
-                    context = luajs.newContext(),
-                    bin;
+                    context;
 
-                // load the lua into js
-                context.loadStdLib();
+                context = this.createCode(src);
                 this.prepare(context);
-                bin = context.loadString(src, context._G);
-                bin();
+                this.runCode();
                 this.resolveClassNames(context);
-                this.diagram();
 
+                this.diagram();
+                this.onFinish();
                 this.result.setSuccess(true);
                 this.save('Created diagram!', (err) => {
                     callback(null, this.result);
@@ -132,22 +129,10 @@ define([
     };
 
     Diagrammer.prototype.prepare = function (context) {
-        var varFrame = context._G.stringMap,
-            oldSetMetaTable = varFrame.setmetatable,
-            self = this;
+        // Override in subclass!
+    };
 
-        // Override setmetatable
-        varFrame.setmetatable = function (child, base) {
-            // Create the nodes and connection
-            // TODO
-            self.recordInheritance(child, base);
-
-            // Retrieve the name of the object...?
-            return oldSetMetaTable.call(this, child, base);
-        }
-
-        // Get the current variables
-        this.originalVars = this._getAllVarNames(context);
+    Diagrammer.prototype.onFinish = function () {
     };
 
     Diagrammer.prototype.resolveClassNames = function (context) {
@@ -174,8 +159,12 @@ define([
         var vars = this._getAllVarNames(context),
             names = _.difference(vars, this.originalVars),
             result = {};
-        names.forEach(name => result[name] = context._G.stringMap[name]);
+        names.forEach(name => result[name] = this.resolveVariable(context, name));
         return result;
+    };
+
+    Diagrammer.prototype.resolveVariable = function (context, name) {
+        return context._G.stringMap[name];
     };
 
     Diagrammer.prototype._getAllVarNames = function (context) {

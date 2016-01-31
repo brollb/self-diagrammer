@@ -8,6 +8,14 @@
       "CreateCode": {
         "src": "src/plugins/CreateCode",
         "test": "test/plugins/CreateCode"
+      },
+      "ImportLua": {
+        "src": "src/plugins/ImportLua",
+        "test": "test/plugins/ImportLua"
+      },
+      "ImportRubyClass": {
+        "src": "src/plugins/ImportRubyClass",
+        "test": "test/plugins/ImportRubyClass"
       }
     },
     "seeds": {
