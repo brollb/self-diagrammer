@@ -8,10 +8,14 @@
 define([
     'TemplateCreator/TemplateCreator',
     './JavaGenerator',
+    './LuaGenerator',
+    './RubyGenerator',
     './JSGenerator'
 ], function (
     PluginBase,
     JavaGenerator,
+    LuaGenerator,
+    RubyGenerator,
     JSGenerator
 ) {
     'use strict';
@@ -29,7 +33,9 @@ define([
         this.generator = null;
         this.generators = {
             Java: new JavaGenerator(),
-            JavaScript: new JSGenerator()
+            JavaScript: new JSGenerator(),
+            Ruby: new RubyGenerator(),
+            Lua: new LuaGenerator()
         };
     };
 

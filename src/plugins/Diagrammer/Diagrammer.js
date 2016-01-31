@@ -220,8 +220,8 @@ define([
     };
 
     Diagrammer.prototype.createBaseConn = function (child, base) {
-        var srcNode = this.classNodes[child],
-            dstNode = this.classNodes[base],
+        var srcNode = this.classNodes[base],
+            dstNode = this.classNodes[child],
             conn = this.core.createNode({
                 parent: this.diagramNode,
                 base: this.META.base
@@ -251,11 +251,11 @@ define([
 
         // Add connections
         this.baseClasses.forEach(pair => {
-            var src = pair[0],
-                dst = pair[1];
+            var src = pair[1],
+                dst = pair[0];
 
             console.log('connecting ' + src + ' and ' + dst);
-            graph.setEdge(dst, src);
+            graph.setEdge(src, dst);
         });
 
         // Calculate positions

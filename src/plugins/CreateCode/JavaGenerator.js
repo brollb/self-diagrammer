@@ -8,8 +8,8 @@ define([
     'use strict';
     var JavaGenerator = function() {
         this.template = {
-            Class: 'public class {{= name }} {{ if (' + Constants.NEXT + '.length ' +
-                ') {}} extends {{= ' + Constants.NEXT + '[0].name }}{{ } }} {\n'+
+            Class: 'public class {{= name }} {{ if (' + Constants.PREV + '.length ' +
+                ') {}} extends {{= ' + Constants.PREV + '[0].name }}{{ } }} {\n'+
                 '\tpublic {{= name }} () {\n\t\t// TODO: Add behavior here!\n\t}\n}\n'
         };
     };

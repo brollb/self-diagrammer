@@ -8,8 +8,8 @@ define([
     'use strict';
     var JSGenerator = function() {
         this.template = {
-            Class: '{{ if (' + Constants.NEXT + '.length ) {}}{{= name }}' +
-            '.prototype = Object.create({{= ' + Constants.NEXT + '[0].name }}.prototype);{{ } }}\n' +
+            Class: '{{ if (' + Constants.PREV + '.length ) {}}{{= name }}' +
+            '.prototype = Object.create({{= ' + Constants.PREV + '[0].name }}.prototype);{{ } }}\n' +
             'function {{= name }} () {\n\t// TODO: Create code for {{= name }} here!\n}\n\n'
                 
         };
