@@ -16,8 +16,8 @@ define([
 ) {
     'use strict';
 
-    var WIDTH = 120,
-        HEIGHT = 80;
+    var WIDTH = 60,
+        HEIGHT = 40;
     /**
      * Initializes a new instance of Diagrammer.
      * @class
