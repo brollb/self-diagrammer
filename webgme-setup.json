@@ -5,9 +5,9 @@
         "src": "src/plugins/Diagrammer",
         "test": "test/plugins/Diagrammer"
       },
-      "CreateJava": {
-        "src": "src/plugins/CreateJava",
-        "test": "test/plugins/CreateJava"
+      "CreateCode": {
+        "src": "src/plugins/CreateCode",
+        "test": "test/plugins/CreateCode"
       }
     },
     "seeds": {
