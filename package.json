@@ -7,7 +7,7 @@
   "version": "1.0.0",
   "dependencies": {
     "webgme": "^1.1.0",
-    "webgme-simple-nodes": "brollb/webgme-simple-nodes"
+    "webgme-simple-nodes": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "^2.2.5",
